@@ -1,0 +1,19 @@
+.notesRow {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.weekNumber {
+  background-color: var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.lastWeek .weekNumber {
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.weekNumberSelected {
+  background-color: var(--gray-200);
+}

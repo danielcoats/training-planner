@@ -1,0 +1,20 @@
+.workoutCard {
+  background-color: var(--light);
+  border-width: 0;
+  margin-bottom: var(--spacing-2);
+  transition: var(--btn-transition);
+}
+
+.workoutCard:hover {
+  background-color: var(--gray-200);
+}
+
+.checkbox {
+  height: 0.9rem;
+  width: 0.9rem;
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  border-radius: 100%;
+  border: 2px solid var(--gray-500);
+}

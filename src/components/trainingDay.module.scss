@@ -1,0 +1,12 @@
+.cell {
+  border-right: 1px solid rgba(0,0,0,.125);
+  min-height: 9rem;
+
+  &:last-child {
+    border-right-width: 0;
+  }
+}
+
+.dragOver {
+  background-color: var(--gray-100);
+}

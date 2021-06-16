@@ -1,0 +1,28 @@
+.addWeekButton {
+  margin-top: var(--spacing-3);
+}
+
+.trainingCalendar {
+  margin-top: 1rem;
+  border: var(--border-width) solid rgba(black, 0.125);
+  border-radius: var(--border-radius);
+}
+
+.calendarHeader {
+  padding: 0.75rem;
+  background-color: var(--gray-100);
+  border-bottom: var(--border-width) solid rgba(black, 0.125);
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  border-radius: var(--inner-border-radius) var(--inner-border-radius) 0 0;
+}
+
+.trainingWeek {
+  border-bottom: 1px solid rgba(0,0,0,.125);
+
+  &:last-child {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    border-bottom-width: 0;
+  }
+}

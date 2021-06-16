@@ -1,0 +1,15 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  bottom: 0;
+  width: 400px;
+  z-index: 1050;
+  background: white;
+  padding: var(--spacing-3);
+  border-left: 1px solid var(--light);
+}
+
+.sidebarVisible {
+  right: 0;
+}

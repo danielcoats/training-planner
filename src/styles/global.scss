@@ -1,0 +1,28 @@
+// Override default variables before importing Bootstrap
+@import 'theme.scss';
+
+// Import Bootstrap
+@import 'bootstrap.scss';
+
+// Import react-datepicker
+@import '~react-datepicker/dist/react-datepicker.css';
+
+// Define custom properties
+:root {
+  @each $shade, $value in $grays {
+    --gray-#{$shade}: #{$value};
+  }
+
+  --border-radius: #{$border-radius};
+
+  @each $size, $length in $spacers {
+    --spacing-#{$size}: #{$length};
+  }
+
+  --btn-transition: #{$btn-transition};
+
+  --border-width: #{$border-width};
+  --border-color: #{$border-color};
+  --border-radius: #{$border-radius};
+  --inner-border-radius: #{subtract($card-border-radius, $card-border-width)};
+}
