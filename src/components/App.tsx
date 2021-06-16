@@ -3,7 +3,7 @@ import { shallowEqual } from 'react-redux';
 import { selectPlans } from '../features/plansSlice';
 import { useAppSelector } from '../hooks';
 import { EmptyState } from './EmptyState';
-import { TrainingLog } from './TrainingLog';
+import { TrainingPlanner } from './TrainingPlanner';
 import styles from './app.module.scss';
 import { default as cn } from 'classnames';
 import { WorkoutLibrary } from './WorkoutLibrary';
@@ -13,7 +13,7 @@ export function App() {
   const loading = useAppSelector((state) => state.app.loading);
   const sidebarVisible = useAppSelector((state) => state.app.sidebarVisible);
 
-  let screen = plans.length ? <TrainingLog /> : <EmptyState />;
+  let screen = plans.length ? <TrainingPlanner /> : <EmptyState />;
 
   return (
     <>
@@ -23,7 +23,7 @@ export function App() {
         })}>
         <Navbar expand="lg" variant="dark" bg="dark" className="mb-3">
           <Container>
-            <Navbar.Brand href="#">Running Training Log</Navbar.Brand>
+            <Navbar.Brand href="#">Running Planner</Navbar.Brand>
             <Nav className="justify-content-end">
               <Nav.Link active={true} href="#training">
                 Training

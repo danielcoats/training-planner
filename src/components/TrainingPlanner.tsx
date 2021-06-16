@@ -8,10 +8,10 @@ import { addWeekToDb, selectWeeksByPlanId } from '../features/weeksSlice';
 import { selectWorkouts } from '../features/workoutsSlice';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { ActionBar } from './ActionBar';
-import styles from './trainingLog.module.scss';
+import styles from './trainingPlanner.module.scss';
 import { TrainingWeek } from './TrainingWeek';
 
-export function TrainingLog() {
+export function TrainingPlanner() {
   const [selectedWeek, setSelectedWeek] = useState('');
 
   const selectedPlan = useAppSelector((state) => {
