@@ -14,6 +14,8 @@ import {
   AddEditWorkoutPopover,
 } from './AddEditWorkoutPopover';
 import styles from './workoutCard.module.scss';
+import { ReactComponent as CheckIcon } from 'bootstrap-icons/icons/check.svg';
+import { default as cn } from 'classnames';
 
 interface WorkoutCardProps {
   workout: Workout;
@@ -39,6 +41,18 @@ export function WorkoutCard({ workout }: WorkoutCardProps) {
       }),
     );
     setPopoverVisibility(false);
+  };
+
+  const handleWorkoutChecked = async (event: React.MouseEvent) => {
+    event.stopPropagation();
+    await dispatch(
+      updateWorkoutInDb({
+        id: workout.id,
+        changes: {
+          completed: workout.completed ? !workout.completed : true,
+        },
+      }),
+    );
   };
 
   const handleDelete = async () => {
@@ -73,12 +87,17 @@ export function WorkoutCard({ workout }: WorkoutCardProps) {
       onToggle={(nextShow) => setPopoverVisibility(nextShow)}
       overlay={renderPopover}
       rootClose={true}>
-      <Card className={styles.workoutCard} ref={drag}>
-        {/* TODO: implement checkbox */}
-        {/* <div className={styles.checkbox}></div> */}
+      <Card
+        className={cn(styles.workoutCard, {
+          [styles.workoutCompleted]: workout.completed,
+        })}
+        ref={drag}>
+        <div className={styles.checkbox} onClick={handleWorkoutChecked}>
+          <CheckIcon></CheckIcon>
+        </div>
         <Card.Body className="text-center">
           <Card.Text className="mb-0">{workout.type}</Card.Text>
-          <Card.Text className="text-muted small">
+          <Card.Text className={cn(styles.subtitle, 'small')}>
             {workout.description}
           </Card.Text>
         </Card.Body>

@@ -1,15 +1,25 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Plan, selectPlanById, selectPlans } from '../features/plansSlice';
 import { WeekDay } from '../features/types';
-import { addWeekToDb, selectWeeksByPlanId } from '../features/weeksSlice';
-import { selectWorkouts } from '../features/workoutsSlice';
+import {
+  addWeekToDb,
+  deleteWeekFromDb,
+  selectWeeksByPlanId,
+} from '../features/weeksSlice';
+import {
+  deleteWorkoutsByWeekIdFromDb,
+  selectWorkouts,
+} from '../features/workoutsSlice';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { ActionBar } from './ActionBar';
 import styles from './trainingPlanner.module.scss';
 import { TrainingWeek } from './TrainingWeek';
+import { default as cn } from 'classnames';
+import { addSeedDataToPlan } from '../utils/development';
+import { TrainingNotes } from './TrainingNotes';
 
 export function TrainingPlanner() {
   const [selectedWeek, setSelectedWeek] = useState('');
@@ -38,39 +48,85 @@ export function TrainingPlanner() {
     );
   };
 
+  const handleClickDeleteWeek = (id: string) => {
+    dispatch(deleteWeekFromDb(id));
+    dispatch(deleteWorkoutsByWeekIdFromDb(id));
+  };
+
+  const handleClickAddTestData = async () => {
+    await dispatch(addSeedDataToPlan(selectedPlan.id));
+  };
+
   return (
     <Container>
       <ActionBar plan={selectedPlan} />
       <div className={styles.trainingCalendar}>
         <Row className={styles.calendarHeader}>
-          <Col xs={1}></Col>
+          <Col className={styles.headerCell} xs={1}></Col>
           {Object.values(WeekDay).map((day) => (
-            <Col key={day}>{day}</Col>
+            <Col key={day} className={cn(styles.dayCell, styles.headerCell)}>
+              {day}
+            </Col>
           ))}
         </Row>
         <DndProvider backend={HTML5Backend}>
-          {weeks.map((week, i) => (
-            <div key={week.id} className={styles.trainingWeek}>
-              <TrainingWeek
-                week={week}
-                weekNumber={i + 1}
-                onSelectWeek={(id) => setSelectedWeek(id)}
-                plan={selectedPlan}
-                workouts={workouts}
-                isSelected={selectedWeek === week.id}
-                lastWeek={i + 1 === weeks.length}
-              />
-            </div>
-          ))}
+          {weeks.map((week, i) => {
+            const lastWeek = i + 1 === weeks.length;
+            const isSelected = selectedWeek === week.id;
+            return (
+              <Fragment key={week.id}>
+                <Row className={cn(styles.weekWrapper, 'no-gutters')}>
+                  <TrainingWeek
+                    week={week}
+                    weekNumber={i + 1}
+                    onSelectWeek={(id) => setSelectedWeek(id)}
+                    plan={selectedPlan}
+                    workouts={workouts}
+                    isSelected={isSelected}
+                    lastWeek={lastWeek}
+                  />
+                </Row>
+                {selectedWeek === week.id && (
+                  <Row
+                    className={cn(styles.notesWrapper, 'no-gutters p-3', {
+                      [styles.lastWeek]: lastWeek,
+                    })}>
+                    <Col>
+                      <Row>
+                        <Col>
+                          <TrainingNotes week={week} />
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <Button
+                            variant="danger"
+                            className="float-right"
+                            onClick={() => handleClickDeleteWeek(week.id)}>
+                            Delete Week
+                          </Button>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+                )}
+              </Fragment>
+            );
+          })}
         </DndProvider>
       </div>
-      <Row className="no-gutters">
-        <Button
-          className={styles.addWeekButton}
-          variant="light"
-          onClick={handleClickAddWeek}>
-          + Add Week
-        </Button>
+      <Row className={cn(styles.actionRow, 'no-gutters')}>
+        <Col>
+          <Button variant="light" onClick={handleClickAddWeek}>
+            + Add Week
+          </Button>
+          <Button
+            className="float-right"
+            variant="link"
+            onClick={handleClickAddTestData}>
+            Add Test Data
+          </Button>
+        </Col>
       </Row>
     </Container>
   );

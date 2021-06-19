@@ -1,28 +1,52 @@
-.addWeekButton {
+.actionRow {
   margin-top: var(--spacing-3);
 }
 
 .trainingCalendar {
   margin-top: 1rem;
-  border: var(--border-width) solid rgba(black, 0.125);
+  border: var(--border-width) solid var(--border-color);
   border-radius: var(--border-radius);
+  overflow-x: auto;
 }
 
 .calendarHeader {
-  padding: 0.75rem;
-  background-color: var(--gray-100);
-  border-bottom: var(--border-width) solid rgba(black, 0.125);
   font-weight: bold;
   text-align: center;
   margin: 0;
-  border-radius: var(--inner-border-radius) var(--inner-border-radius) 0 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  flex-wrap: nowrap;
+
+  .headerCell {
+    padding: 0.75rem 0;
+    background-color: var(--gray-100);
+    border-bottom: var(--border-width) solid var(--border-color);
+  }
+
+  .dayCell {
+    flex-basis: 8rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+  }
 }
 
-.trainingWeek {
-  border-bottom: 1px solid rgba(0,0,0,.125);
+.weekWrapper {
+  flex-wrap: nowrap;
 
   &:last-child {
     border-radius: 0 0 var(--border-radius) var(--border-radius);
     border-bottom-width: 0;
+  }
+}
+
+.notesWrapper {
+  border-style: solid;
+  border-color: var(--border-color);
+  border-width: 0 0 var(--border-width) 0;
+  position: sticky;
+  left: 0;
+
+  &.lastWeek {
+    border-bottom-width: var(--border-width);
+    border-width: var(--border-width) 0 0 0;
   }
 }

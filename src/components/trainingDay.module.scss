@@ -1,6 +1,14 @@
 .cell {
-  border-right: 1px solid rgba(0,0,0,.125);
+  border-right: var(--border-width) solid var(--border-color);
   min-height: 9rem;
+  flex-basis: 8rem;
+  flex-shrink: 0;
+  flex-grow: 1;
+  border-bottom: var(--border-width) solid var(--border-color);
+
+  &.lastWeek {
+    border-bottom-width: 0;
+  }
 
   &:last-child {
     border-right-width: 0;

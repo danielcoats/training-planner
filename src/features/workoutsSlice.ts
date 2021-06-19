@@ -16,6 +16,7 @@ export interface Workout {
   type: string;
   description: string;
   dayOfWeek: WeekDay;
+  completed?: boolean;
   distance?: number;
   distanceUnits?: Unit;
   notes?: string;
@@ -84,6 +85,18 @@ export const addWorkoutToDb = createAsyncThunk(
   },
 );
 
+export const addWorkoutsToDb = createAsyncThunk(
+  'workouts/addWorkoutsToDb',
+  async (payload: Omit<Workout, 'id'>[]) => {
+    const workouts = payload.map((workout) => ({
+      ...workout,
+      id: nanoid(),
+    }));
+    await db.workouts.bulkAdd(workouts);
+    return workouts;
+  },
+);
+
 export const loadAndAddWorkoutsFromDb = createAsyncThunk<
   Workout[],
   undefined,
@@ -113,6 +126,9 @@ const workoutsSlice = createSlice({
         workoutsAdapter.removeOne(state, payload);
       })
       .addCase(loadAndAddWorkoutsFromDb.fulfilled, (state, { payload }) => {
+        workoutsAdapter.addMany(state, payload);
+      })
+      .addCase(addWorkoutsToDb.fulfilled, (state, { payload }) => {
         workoutsAdapter.addMany(state, payload);
       });
   },

@@ -1,17 +1,20 @@
-.notesRow {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
-
 .weekNumber {
   background-color: var(--light);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid rgba(0, 0, 0, 0.125);
-}
+  border-color: var(--border-color);
+  border-width: 0 var(--border-width) var(--border-width) 0;
+  border-style: solid;
 
-.lastWeek .weekNumber {
-  border-bottom-left-radius: var(--border-radius);
+  &.lastWeek {
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-width: 0;
+  }
+
+  &.lastWeek.weekNumberSelected {
+    border-bottom-left-radius: 0;
+  }
 }
 
 .weekNumberSelected {

@@ -14,6 +14,7 @@ interface TrainingDayProps {
   planId: string;
   weekId: string;
   dayOfWeek: WeekDay;
+  lastWeek: boolean;
 }
 
 export function TrainingDay({
@@ -21,6 +22,7 @@ export function TrainingDay({
   planId,
   weekId,
   dayOfWeek,
+  lastWeek,
 }: TrainingDayProps) {
   const [addButtonShown, setAddButtonShown] = useState(false);
   const dispatch = useAppDispatch();
@@ -42,6 +44,7 @@ export function TrainingDay({
       key={dayOfWeek}
       className={cn(styles.cell, 'p-2 d-flex flex-column', {
         [styles.dragOver]: isOver,
+        [styles.lastWeek]: lastWeek,
       })}
       onMouseEnter={() => setAddButtonShown(true)}
       onMouseLeave={() => setAddButtonShown(false)}>

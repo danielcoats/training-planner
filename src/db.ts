@@ -13,7 +13,7 @@ export class TrainingLogDatabase extends Dexie {
     this.version(1).stores({
       plans: '&id, name, numWeeks, eventDate',
       workouts:
-        '&id, planId, weekId, type, workout, dayOfWeek, distance, distanceUnits, notes',
+        '&id, planId, weekId, type, workout, dayOfWeek, completed, distance, distanceUnits, notes',
       weeks: 'id, planId, position, notes',
     });
     this.plans = this.table('plans');
