@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Button, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import {
   selectedPlanIdUpdated,
-  sidebarVisibilitySet,
 } from '../features/appSlice';
 import { Plan, selectPlans } from '../features/plansSlice';
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -36,11 +35,6 @@ export function ActionBar({ plan }: ActionBarProps) {
   const otherPlans = plans.filter((p) => p.id !== plan.id);
   const planAbbrev =
     plan.name.length > 12 ? plan.name.substr(0, 12) + '…' : plan.name;
-
-  const sidebarVisible = useAppSelector((state) => state.app.sidebarVisible);
-  const toggleSidebarVisible = () => {
-    dispatch(sidebarVisibilitySet(!sidebarVisible));
-  };
 
   return (
     <>
@@ -80,16 +74,6 @@ export function ActionBar({ plan }: ActionBarProps) {
               Days Until Event: {daysUntil(plan.eventDate)}
             </div>
           )}
-        </Col>
-        <Col className="d-flex justify-content-end">
-          {/* TODO: implement sidebar */}
-          {/* <Button
-            className="mr-1"
-            variant="light"
-            size="lg"
-            onClick={toggleSidebarVisible}>
-            Workout Library
-          </Button> */}
         </Col>
       </Row>
       <AddEditTrainingPlanModal
