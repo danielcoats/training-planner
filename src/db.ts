@@ -9,7 +9,7 @@ export class TrainingPlannerDatabase extends Dexie {
   weeks: Dexie.Table<Week, string>;
 
   constructor() {
-    super('TrainngLogDatabase');
+    super('TrainingPlannerDatabase');
     this.version(1).stores({
       plans: '&id, name, numWeeks, eventDate',
       workouts:
