@@ -3,7 +3,7 @@ import { Plan } from './features/plansSlice';
 import { Week } from './features/weeksSlice';
 import { Workout } from './features/workoutsSlice';
 
-export class TrainingLogDatabase extends Dexie {
+export class TrainingPlannerDatabase extends Dexie {
   plans: Dexie.Table<Plan, string>;
   workouts: Dexie.Table<Workout, string>;
   weeks: Dexie.Table<Week, string>;
@@ -22,4 +22,4 @@ export class TrainingLogDatabase extends Dexie {
   }
 }
 
-export const db = new TrainingLogDatabase();
+export const db = new TrainingPlannerDatabase();

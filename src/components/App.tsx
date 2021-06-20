@@ -23,12 +23,7 @@ export function App() {
         })}>
         <Navbar expand="lg" variant="dark" bg="dark" className="mb-3">
           <Container>
-            <Navbar.Brand href="#">Running Planner</Navbar.Brand>
-            <Nav className="justify-content-end">
-              <Nav.Link active={true} href="#training">
-                Training
-              </Nav.Link>
-            </Nav>
+            <Navbar.Brand href="#">Running Training Planner</Navbar.Brand>
           </Container>
         </Navbar>
         {loading ? null : screen}
