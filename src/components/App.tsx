@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Navbar } from 'react-bootstrap';
 import { shallowEqual } from 'react-redux';
 import { selectPlans } from '../features/plansSlice';
 import { useAppSelector } from '../hooks';

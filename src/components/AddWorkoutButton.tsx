@@ -58,7 +58,7 @@ export function AddWorkoutButton({
       overlay={renderPopover}
       rootClose={true}>
       <Button
-        className={cn(styles.button, { invisible: !visible })}
+        className={cn(styles.button, { invisible: !visible && !showPopover })}
         variant="light">
         + Add Workout
       </Button>
