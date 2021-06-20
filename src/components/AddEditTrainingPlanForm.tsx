@@ -1,8 +1,5 @@
 import { Button, Form } from 'react-bootstrap';
 import { FormikErrors, useFormik } from 'formik';
-import { isValidDate } from '../utils/date-utils';
-import DatePicker from 'react-datepicker';
-import { default as cn } from 'classnames';
 
 export interface AddEditPlanInput {
   name: string;
@@ -13,8 +10,6 @@ const validate = (values: AddEditPlanInput) => {
   let errors: FormikErrors<AddEditPlanInput> = {};
   if (!values.name) {
     errors.name = 'Plan name is required';
-  } else if (values.eventDate !== null && !isValidDate(values.eventDate)) {
-    errors.eventDate = 'Invalid date';
   }
   return errors;
 };
@@ -45,10 +40,6 @@ export function AddEditTrainingPlanForm({
     validate,
   });
 
-  const handleEventDateChange = (date: Date | null) => {
-    formik.setFieldValue('eventDate', date);
-  };
-
   return (
     <Form onSubmit={formik.handleSubmit} autoComplete="off">
       <Form.Group>
@@ -62,24 +53,6 @@ export function AddEditTrainingPlanForm({
           isValid={formik.touched.name && !formik.errors.name}
           isInvalid={formik.touched.name && formik.errors.name !== undefined}
           {...formik.getFieldProps('name')}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Event Date (Optional)</Form.Label>
-        <DatePicker
-          id="eventDate"
-          name="eventDate"
-          autoComplete="off"
-          selected={formik.values.eventDate}
-          onChange={handleEventDateChange}
-          onCalendarClose={() => formik.setFieldTouched('eventDate')}
-          wrapperClassName="w-100"
-          className={cn(`form-control form-control-${size}`, {
-            'is-valid':
-              formik.touched.eventDate && formik.errors.eventDate === undefined,
-          })}
-          isClearable
-          placeholderText="Select the date"
         />
       </Form.Group>
       <Button size={size} variant="primary" type="submit">

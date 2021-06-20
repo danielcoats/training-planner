@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { Button, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
-import {
-  selectedPlanIdUpdated,
-} from '../features/appSlice';
+import { selectedPlanIdUpdated } from '../features/appSlice';
 import { Plan, selectPlans } from '../features/plansSlice';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { daysUntil } from '../utils/date-utils';
-import styles from './actionBar.module.scss';
 import { AddEditTrainingPlanModal } from './AddEditTrainingPlanModal';
 
 interface ActionBarProps {
@@ -34,7 +30,7 @@ export function ActionBar({ plan }: ActionBarProps) {
 
   const otherPlans = plans.filter((p) => p.id !== plan.id);
   const planAbbrev =
-    plan.name.length > 12 ? plan.name.substr(0, 12) + '…' : plan.name;
+    plan.name.length > 30 ? plan.name.substr(0, 30) + '…' : plan.name;
 
   return (
     <>
@@ -67,13 +63,6 @@ export function ActionBar({ plan }: ActionBarProps) {
             onClick={() => showAddEditPlanModal(false)}>
             Edit
           </Button>
-        </Col>
-        <Col xs={4} className="text-center">
-          {plan.eventDate && (
-            <div className={styles.daysUntil}>
-              Days Until Event: {daysUntil(plan.eventDate)}
-            </div>
-          )}
         </Col>
       </Row>
       <AddEditTrainingPlanModal

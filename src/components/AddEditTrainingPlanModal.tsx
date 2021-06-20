@@ -75,7 +75,6 @@ export function AddEditTrainingPlanModal({
           editing={plan !== undefined}
           onSubmit={handleSubmit}
           onDelete={handleDelete}
-          size="sm"
           initialValues={initialValues}
         />
       </Modal.Body>
