@@ -6,6 +6,8 @@ import { Workout } from '../features/workoutsSlice';
 import styles from './trainingWeek.module.scss';
 import { TrainingDay } from './TrainingDay';
 import { default as cn } from 'classnames';
+import { ReactComponent as ChevronDown } from 'bootstrap-icons/icons/chevron-down.svg';
+import { ReactComponent as ChevronUp } from 'bootstrap-icons/icons/chevron-up.svg';
 
 interface TrainingWeekProps {
   week: Week;
@@ -36,6 +38,7 @@ export function TrainingWeek({
         })}
         onClick={() => onSelectWeek(isSelected ? '' : week.id)}>
         <div>{weekNumber}</div>
+        {isSelected ? <ChevronUp /> : <ChevronDown />}
       </Col>
       {Object.values(WeekDay).map((day) => (
         <TrainingDay

@@ -4,11 +4,12 @@ import { OverlayInjectedProps } from 'react-bootstrap/esm/Overlay';
 
 const WORKOUT_TYPES = [
   'Run',
+  'Jog',
   'Time Trial',
   'Fartlek',
   'Cross-train',
-  'Long run',
   'Intervals',
+  'Tempo',
 ];
 
 const DEFAULT_VALUES = {

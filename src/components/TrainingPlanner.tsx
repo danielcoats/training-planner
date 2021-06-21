@@ -124,7 +124,7 @@ export function TrainingPlanner() {
             className="float-right"
             variant="link"
             onClick={handleClickAddTestData}>
-            Add Test Data
+            Add Sample Data
           </Button>
         </Col>
       </Row>

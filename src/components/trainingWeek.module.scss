@@ -6,6 +6,11 @@
   border-color: var(--border-color);
   border-width: 0 var(--border-width) var(--border-width) 0;
   border-style: solid;
+  font-weight: bold;
+
+  svg {
+    margin-left: 0.5rem;
+  }
 
   &.lastWeek {
     border-bottom-left-radius: var(--border-radius);
