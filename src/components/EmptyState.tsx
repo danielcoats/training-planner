@@ -1,4 +1,6 @@
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { useRef } from 'react';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { db } from '../db';
 import { addNewPlanToDb } from '../features/plansSlice';
 import { addWeekToDb } from '../features/weeksSlice';
 import { useAppDispatch } from '../hooks';
@@ -7,9 +9,12 @@ import {
   AddEditPlanInput,
   AddEditTrainingPlanForm,
 } from './AddEditTrainingPlanForm';
+import { importInto } from 'dexie-export-import';
+import { initializeData } from '../features/appSlice';
 
 export function EmptyState() {
   const dispatch = useAppDispatch();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const submitForm = async (values: AddEditPlanInput) => {
     const resultAction = await dispatch(
@@ -22,6 +27,20 @@ export function EmptyState() {
       await dispatch(
         addWeekToDb({ planId: resultAction.payload.id, position: 1 }),
       );
+    }
+  };
+
+  const openFilePicker = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileImport = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files !== null ? event.target.files[0] : null;
+    if (file) {
+      await importInto(db, file);
+      dispatch(initializeData());
     }
   };
 
@@ -46,6 +65,17 @@ export function EmptyState() {
             onSubmit={submitForm}
             size="lg"
           />
+          <Button
+            className="mt-2"
+            variant="link"
+            onClick={() => openFilePicker()}>
+            Import from file
+          </Button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileImport}
+            style={{ display: 'none' }}></input>
         </Col>
       </Row>
     </Container>

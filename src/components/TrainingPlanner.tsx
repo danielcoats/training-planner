@@ -58,7 +58,7 @@ export function TrainingPlanner() {
   };
 
   return (
-    <Container>
+    <Container className="mb-3">
       <ActionBar plan={selectedPlan} />
       <div className={styles.trainingCalendar}>
         <Row className={styles.calendarHeader}>
