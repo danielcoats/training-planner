@@ -94,7 +94,7 @@ export function ActionBar({ plan }: ActionBarProps) {
         </Col>
         <Col className="d-flex justify-content-end">
           <Button variant="light" size="lg" onClick={() => exportAsJson()}>
-            Export
+            Download
           </Button>
         </Col>
       </Row>

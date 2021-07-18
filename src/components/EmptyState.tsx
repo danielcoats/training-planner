@@ -69,7 +69,7 @@ export function EmptyState() {
             className="mt-2"
             variant="link"
             onClick={() => openFilePicker()}>
-            Import from file
+            Open from file
           </Button>
           <input
             type="file"
